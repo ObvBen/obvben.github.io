@@ -9,7 +9,6 @@ on:
 permissions:
   contents: write
 
-# Empêche deux exécutions de modifier main simultanément
 concurrency:
   group: update-shows
   cancel-in-progress: false
@@ -49,7 +48,7 @@ jobs:
             echo "Changes detected."
           fi
 
-      - name: Commit and push changes
+      - name: Commit changes
         if: steps.compare.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
@@ -58,8 +57,14 @@ jobs:
           git add shows.json
           git commit -m "🤖 Update shows"
 
-          # Récupère les éventuels nouveaux commits sur main
-          git pull --rebase origin main
+      - name: Rebase on latest main
+        if: steps.compare.outputs.changed == 'true'
+        run: |
+          git fetch origin main
+          git rebase origin/main
 
-          # Pousse notre commit par-dessus la dernière version
-          git push origin main
+      - name: Push changes
+        if: steps.compare.outputs.changed == 'true'
+        run: |
+          git push origin HEAD:main
+
