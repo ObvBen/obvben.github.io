@@ -9,6 +9,11 @@ on:
 permissions:
   contents: write
 
+# Empêche deux exécutions de modifier main simultanément
+concurrency:
+  group: update-shows
+  cancel-in-progress: false
+
 jobs:
   update-shows:
     runs-on: ubuntu-latest
@@ -16,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -50,4 +57,9 @@ jobs:
 
           git add shows.json
           git commit -m "🤖 Update shows"
-          git push
+
+          # Récupère les éventuels nouveaux commits sur main
+          git pull --rebase origin main
+
+          # Pousse notre commit par-dessus la dernière version
+          git push origin main
