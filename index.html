@@ -5,523 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Here's my list !</title>
+  <link rel="stylesheet" href="style.css">
 
-  <style>
-
-    :root {
-      --musical-color: #a63d5d;
-      --musical-dark: #7d2945;
-      --musical-light: #f8e9ee;
-
-      --play-color: #5969a8;
-      --play-dark: #414e82;
-      --play-light: #eef0fa;
-
-      --audio-color: #c49a3a;
-      --video-color: #6b9f8a;
-
-      --text: #282124;
-      --muted: #766c70;
-      --border: #eadfe3;
-      --background: #f8f5f6;
-      --card: #ffffff;
-      --footer: #fcf9fa;
-    }
-
-
-    * {
-      box-sizing: border-box;
-    }
-
-
-    body {
-      margin: 0;
-      padding: 40px 20px;
-
-      background: var(--background);
-      color: var(--text);
-
-      font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-    }
-
-
-    /* =========================
-       CARD
-       ========================= */
-
-    .show-card {
-      width: min(100%, 800px);
-      margin: 0 auto 24px;
-
-      background: var(--card);
-
-      border: 1px solid var(--border);
-      border-radius: 20px;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 12px 40px rgba(90, 30, 50, 0.09);
-    }
-
-
-    /* =========================
-       HEADER / CLICK AREA
-       ========================= */
-
-    .show-header {
-      position: relative;
-
-      padding: 32px 30px 28px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff 0%,
-          #ffffff 55%,
-          var(--musical-light) 100%
-        );
-
-      border-top: 7px solid var(--musical-color);
-
-      cursor: pointer;
-
-      user-select: none;
-    }
-
-
-    .show-header:hover {
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff 0%,
-          #ffffff 45%,
-          var(--musical-light) 100%
-        );
-    }
-
-
-    .show-title {
-      margin: 0 0 12px;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size: 38px;
-      line-height: 1.1;
-      font-weight: 600;
-
-      letter-spacing: -1px;
-
-      color: #261d21;
-    }
-
-
-    /* =========================
-       SHOW TYPE BADGES
-       ========================= */
-
-    .show-types {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      flex-wrap: wrap;
-    }
-
-
-    .show-type,
-    .document-type {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      min-width: 110px;
-
-      padding: 7px 16px;
-
-      border-radius: 999px;
-
-      color: white;
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.7px;
-    }
-
-
-    /* Musical */
-
-    .show-type.musical {
-      background: var(--musical-color);
-    }
-
-
-    /* Play */
-
-    .show-type.play {
-      background: var(--play-color);
-    }
-
-
-    /* Audio */
-
-    .document-type.audio {
-      background: var(--audio-color);
-    }
-
-
-    /* Video */
-
-    .document-type.video {
-      background: var(--video-color);
-    }
-
-
-    /* =========================
-       COLLAPSIBLE CONTENT
-       ========================= */
-
-    .show-content {
-      display: grid;
-
-      grid-template-rows: 0fr;
-
-      transition:
-        grid-template-rows 0.35s ease;
-    }
-
-
-    .show-content-inner {
-      overflow: hidden;
-    }
-
-
-    .show-card.open .show-content {
-      grid-template-rows: 1fr;
-    }
-
-
-    /* =========================
-       MAIN INFORMATION
-       ========================= */
-
-    .show-info {
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 20px;
-
-      padding: 22px 30px;
-
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-
-    .info-label,
-    .section-title {
-      margin-bottom: 7px;
-
-      color: var(--musical-color);
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-
-    .info-value {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-
-    /* =========================
-       SECTIONS
-       ========================= */
-
-    .show-section {
-      padding: 24px 30px;
-    }
-
-
-    .show-section + .show-section {
-      padding-top: 24px;
-
-      border-top: 1px solid var(--border);
-    }
-
-
-    /* =========================
-       CAST
-       ========================= */
-
-    .cast {
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 8px;
-    }
-
-
-    .cast-member {
-      padding-left: 12px;
-
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-
-    .cast-member .actor {
-      color: var(--text);
-
-      font-weight: 600;
-    }
-
-
-    .cast-member .character {
-      color: var(--muted);
-
-      font-weight: 400;
-    }
-
-
-    /* =========================
-       MISSING INFORMATION
-       ========================= */
-
-    .missing {
-      display: inline-block;
-
-      padding: 5px 9px;
-
-      border-radius: 6px;
-
-      background: #f3eff1;
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      font-style: italic;
-    }
-
-
-    /* =========================
-       FOOTER
-       ========================= */
-
-    .show-footer {
-      display: flex;
-
-      justify-content: flex-end;
-
-      padding: 18px 30px;
-
-      background: var(--footer);
-
-      border-top: 1px solid var(--border);
-    }
-
-
-    .external-link {
-      color: var(--musical-color);
-
-      text-decoration: none;
-
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-
-    .external-link:hover {
-      color: var(--musical-dark);
-
-      text-decoration: underline;
-    }
-
-
-    /* =========================
-       FILTER CARD
-       ========================= */
-
-    .filter-card {
-      width: min(100%, 800px);
-      margin: 0 auto 24px;
-
-      padding: 24px 30px;
-
-      background: var(--card);
-
-      border: 1px solid var(--border);
-      border-radius: 20px;
-
-      box-shadow:
-        0 12px 40px rgba(90, 30, 50, 0.07);
-
-      display: flex;
-      align-items: center;
-      gap: 40px;
-    }
-
-
-    .filter-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-
-    .filter-label {
-      margin-right: 4px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-
-    .filter-button {
-      border: none;
-
-      padding: 7px 14px;
-
-      border-radius: 999px;
-
-      background: #f3eff1;
-      color: var(--muted);
-
-      font-family: inherit;
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-
-      cursor: pointer;
-
-      transition:
-        background 0.2s ease,
-        color 0.2s ease;
-    }
-
-
-    .filter-button:hover {
-      background: #e9e1e4;
-    }
-
-
-    /* Active Musical */
-
-    .filter-button[data-filter="type"][data-value="Musical"].active {
-      background: var(--musical-color);
-      color: white;
-    }
-
-
-    /* Active Play */
-
-    .filter-button[data-filter="type"][data-value="Play"].active {
-      background: var(--play-color);
-      color: white;
-    }
-
-
-    /* Active Video */
-
-    .filter-button[data-filter="nature"][data-value="Video"].active {
-      background: var(--video-color);
-      color: white;
-    }
-
-
-    /* Active Audio */
-
-    .filter-button[data-filter="nature"][data-value="Audio"].active {
-      background: var(--audio-color);
-      color: white;
-    }
-
-
-    /* =========================
-       MOBILE
-       ========================= */
-
-    @media (max-width: 520px) {
-
-      body {
-        padding: 20px 12px;
-      }
-
-
-      .show-card {
-        width: 100%;
-      }
-
-
-      .show-header,
-      .show-section,
-      .show-info {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-
-      .show-title {
-        font-size: 31px;
-      }
-
-
-      .show-info {
-        grid-template-columns: 1fr;
-
-        gap: 16px;
-      }
-
-
-      .show-footer {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-
-      .filter-card {
-        padding: 22px;
-
-        flex-direction: column;
-        align-items: flex-start;
-
-        gap: 18px;
-      }
-
-
-      .filter-group {
-        flex-wrap: wrap;
-      }
-
-    }
-
-  </style>
 </head>
 
 
@@ -529,7 +14,39 @@
 
   <main class="shows">
 
+      <!-- =========================
+         IMPORTANT NOTES
+         ========================= -->
 
+    <article class="notes-card">
+
+      <div class="notes-title">
+        Notes :
+      </div>
+
+      <div class="notes-content">
+        <ul>
+          <li>Welcome ! If you want to see this as a spreadsheet instead : <a href="https://1drv.ms/x/c/334dcc5b15be7268/IQDNuBgeqY2BQIde5n2YBDAvAbukF_q3z7R2R9RhDpR2bXM" target="_blank" rel="noopener noreferrer"> click here !</a></li>
+          <li>Here's my <a href="mailto:beepbeepimasheepfr@outlook.com" target="_blank" rel="noopener noreferrer">e-mail</a> if that's necessary : Use Reddit (ObvBen) whenever possible.</li>
+        </ul>
+      </div>
+    </div>
+    </article>
+
+        <article class="notes-card">
+
+      <div class="notes-title">
+        General "Wants" : 
+      </div>
+
+      <div class="notes-content">
+        <ul>
+          <li>Ava Pickett's 1536</li>
+          <li>Hadestown with Michelle Andrews (u/s) as Persephone</li>
+        </ul>
+      </div>
+    </div>
+    </article>
     <!-- =========================
          FILTER
          ========================= -->
@@ -592,6 +109,8 @@
     </article>
 
 
+
+    
     <!-- =========================
          SHOWS
          ========================= -->
@@ -852,7 +371,7 @@
 
                     <div class="cast-member">
                         <span class="actor">Dianté Lodge</span>
-                        <span class="character">(Ru m Tum Tugger)</span>
+                        <span class="character">(Rum Tum Tugger)</span>
                     </div>
                     
 
