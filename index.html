@@ -4,13 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Into the Woods</title>
+  <title>Here's my list !</title>
 
   <style>
+
     :root {
       --musical-color: #a63d5d;
       --musical-dark: #7d2945;
       --musical-light: #f8e9ee;
+
+      --play-color: #5969a8;
+      --play-dark: #414e82;
+      --play-light: #eef0fa;
+
+      --audio-color: #c49a3a;
+      --video-color: #6b9f8a;
 
       --text: #282124;
       --muted: #766c70;
@@ -20,9 +28,11 @@
       --footer: #fcf9fa;
     }
 
+
     * {
       box-sizing: border-box;
     }
+
 
     body {
       margin: 0;
@@ -42,9 +52,14 @@
         sans-serif;
     }
 
+
+    /* =========================
+       CARD
+       ========================= */
+
     .show-card {
-      width: min(100%, 620px);
-      margin: 0 auto;
+      width: min(100%, 800px);
+      margin: 0 auto 24px;
 
       background: var(--card);
 
@@ -57,8 +72,9 @@
         0 12px 40px rgba(90, 30, 50, 0.09);
     }
 
+
     /* =========================
-       HEADER
+       HEADER / CLICK AREA
        ========================= */
 
     .show-header {
@@ -75,7 +91,23 @@
         );
 
       border-top: 7px solid var(--musical-color);
+
+      cursor: pointer;
+
+      user-select: none;
     }
+
+
+    .show-header:hover {
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #ffffff 45%,
+          var(--musical-light) 100%
+        );
+    }
+
 
     .show-title {
       margin: 0 0 12px;
@@ -94,6 +126,7 @@
       color: #261d21;
     }
 
+
     /* =========================
        SHOW TYPE BADGES
        ========================= */
@@ -101,18 +134,24 @@
     .show-types {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+
+      flex-wrap: wrap;
     }
 
-    .show-type {
+
+    .show-type,
+    .document-type {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
 
-      padding: 6px 11px;
+      min-width: 110px;
+
+      padding: 7px 16px;
 
       border-radius: 999px;
 
-      background: var(--musical-color);
       color: white;
 
       font-size: 10px;
@@ -121,13 +160,67 @@
       letter-spacing: 1.7px;
     }
 
+
+    /* Musical */
+
+    .show-type.musical {
+      background: var(--musical-color);
+    }
+
+
+    /* Play */
+
+    .show-type.play {
+      background: var(--play-color);
+    }
+
+
+    /* Audio */
+
+    .document-type.audio {
+      background: var(--audio-color);
+    }
+
+
+    /* Video */
+
+    .document-type.video {
+      background: var(--video-color);
+    }
+
+
+    /* =========================
+       COLLAPSIBLE CONTENT
+       ========================= */
+
+    .show-content {
+      display: grid;
+
+      grid-template-rows: 0fr;
+
+      transition:
+        grid-template-rows 0.35s ease;
+    }
+
+
+    .show-content-inner {
+      overflow: hidden;
+    }
+
+
+    .show-card.open .show-content {
+      grid-template-rows: 1fr;
+    }
+
+
     /* =========================
        MAIN INFORMATION
        ========================= */
 
     .show-info {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns: repeat(3, 1fr);
 
       gap: 20px;
 
@@ -136,6 +229,7 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
+
 
     .info-label,
     .section-title {
@@ -150,10 +244,12 @@
       text-transform: uppercase;
     }
 
+
     .info-value {
       font-size: 15px;
       font-weight: 600;
     }
+
 
     /* =========================
        SECTIONS
@@ -163,9 +259,13 @@
       padding: 24px 30px;
     }
 
+
     .show-section + .show-section {
-      padding-top: 0;
+      padding-top: 24px;
+
+      border-top: 1px solid var(--border);
     }
+
 
     /* =========================
        CAST
@@ -173,18 +273,34 @@
 
     .cast {
       display: flex;
+
       flex-direction: column;
+
       gap: 8px;
     }
 
+
     .cast-member {
+      padding-left: 12px;
+
       font-size: 14px;
       line-height: 1.45;
     }
 
+
+    .cast-member .actor {
+      color: var(--text);
+
+      font-weight: 600;
+    }
+
+
     .cast-member .character {
       color: var(--muted);
+
+      font-weight: 400;
     }
+
 
     /* =========================
        MISSING INFORMATION
@@ -202,8 +318,10 @@
       color: var(--muted);
 
       font-size: 13px;
+
       font-style: italic;
     }
+
 
     /* =========================
        FOOTER
@@ -211,6 +329,7 @@
 
     .show-footer {
       display: flex;
+
       justify-content: flex-end;
 
       padding: 18px 30px;
@@ -220,7 +339,8 @@
       border-top: 1px solid var(--border);
     }
 
-    .wikipedia-link {
+
+    .external-link {
       color: var(--musical-color);
 
       text-decoration: none;
@@ -229,10 +349,13 @@
       font-weight: 700;
     }
 
-    .wikipedia-link:hover {
+
+    .external-link:hover {
       color: var(--musical-dark);
+
       text-decoration: underline;
     }
+
 
     /* =========================
        MOBILE
@@ -244,6 +367,12 @@
         padding: 20px 12px;
       }
 
+
+      .show-card {
+        width: 100%;
+      }
+
+
       .show-header,
       .show-section,
       .show-info {
@@ -251,192 +380,7262 @@
         padding-right: 22px;
       }
 
+
       .show-title {
         font-size: 31px;
       }
 
+
       .show-info {
         grid-template-columns: 1fr;
+
         gap: 16px;
       }
+
 
       .show-footer {
         padding-left: 22px;
         padding-right: 22px;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <article class="show-card">
+  <main class="shows">
 
-    <header class="show-header">
+    
+    <article class="show-card">
 
-      <h1 class="show-title">
-        Into the Woods
-      </h1>
-
-      <div class="show-types">
-        <span class="show-type">MUSICAL</span>
-        <span class="show-type">MUSICAL</span>
-      </div>
-
-    </header>
-
-
-    <div class="show-info">
-
-      <div>
-        <div class="info-label">
-          Date
-        </div>
-
-        <div class="info-value">
-          February 2026
-        </div>
-      </div>
-
-
-      <div>
-        <div class="info-label">
-          Location
-        </div>
-
-        <div class="info-value">
-          Bridge Theatre
-        </div>
-      </div>
-
-    </div>
-
-
-    <section class="show-section">
-
-      <div class="section-title">
-        Cast
-      </div>
-
-      <div class="cast">
-
-        <div class="cast-member">
-          Kate Fleetwood
-          <span class="character">(Witch)</span>
-        </div>
-
-        <div class="cast-member">
-          Jamie Parker
-          <span class="character">(Baker)</span>
-        </div>
-
-        <div class="cast-member">
-          Katie Brayben
-          <span class="character">(Baker's Wife)</span>
-        </div>
-
-        <div class="cast-member">
-          Chumisa Dornford-May
-          <span class="character">(Cinderella)</span>
-        </div>
-
-        <div class="cast-member">
-          Gracie McGonigal
-          <span class="character">(Little Red Riding Hood)</span>
-        </div>
-
-        <div class="cast-member">
-          Jo Foster
-          <span class="character">(Jack)</span>
-        </div>
-
-        <div class="cast-member">
-          Taite-Elliot Drew
-          <span class="character">(s/b Wolf/Cinderella's Prince)</span>
-        </div>
-
-        <div class="cast-member">
-          Rhys Whitfield
-          <span class="character">(Rapunzel's Prince)</span>
-        </div>
-
-        <div class="cast-member">
-          Michael Gould
-          <span class="character">(Narrator/Mysterious Man)</span>
-        </div>
-
-        <div class="cast-member">
-          Julie Jupp
-          <span class="character">(Jack's Mother)</span>
-        </div>
-
-        <div class="cast-member">
-          Jennifer Hepburn
-          <span class="character">(Cinderella's Stepmother)</span>
-        </div>
-
-        <div class="cast-member">
-          Gabrielle Lewis-Dodson
-          <span class="character">(Florinda)</span>
-        </div>
-
-        <div class="cast-member">
-          Hana Ichijo
-          <span class="character">(Lucinda)</span>
-        </div>
-
-        <div class="cast-member">
-          Geoffrey Aymer
-          <span class="character">(Cinderella's Father)</span>
-        </div>
-
-        <div class="cast-member">
-          Hughie O'Donnell
-          <span class="character">(Steward)</span>
-        </div>
-
-        <div class="cast-member">
-          Bella Brown
-          <span class="character">(Rapunzel)</span>
-        </div>
-
-        <div class="cast-member">
-          Valda Aviks
-          <span class="character">(Granny/Giant's Voice)</span>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section class="show-section">
-
-      <div class="section-title">
-        Additional Notes
-      </div>
-
-      <div class="missing">
-        Missing info
-      </div>
-
-    </section>
-
-
-    <footer class="show-footer">
-
-      <a
-        class="wikipedia-link"
-        href="#"
-        target="_blank"
-        rel="noopener noreferrer"
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
       >
-        Wikipedia ↗
-      </a>
 
-    </footer>
+        <h1 class="show-title">
+          Cabaret
+        </h1>
 
-  </article>
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type audio">
+            Audio
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                190 Mo
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Jamie Muscato</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Joy Woods</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Baker Mukasa</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ruthie Henshall</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Cats at Regent's Park
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type audio">
+            Audio
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                155 Mo
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Andrew Parfitt</span>
+                        <span class="character">(Coricopatt & Macavity)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Dianté Lodge</span>
+                        <span class="character">(Ru m Tum Tugger)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Taziva-Faye Katsande</span>
+                        <span class="character">(Grizabella)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Taela-Yeomans Brown</span>
+                        <span class="character">(Tantomile)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Melanie La Barrie</span>
+                        <span class="character">(Old Deuteronomy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Matthew Caputo</span>
+                        <span class="character">(Skimbelshanks)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Elliott Broadfoot</span>
+                        <span class="character">(Bustopher Jones)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Hadestown
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type audio">
+            Audio
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                286 Mo
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Oisín Nolan-Power</span>
+                        <span class="character">(Orpheus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bethany Anthonia</span>
+                        <span class="character">(Eurydice)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Clive Rowe</span>
+                        <span class="character">(Hermes)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Alastair Parker</span>
+                        <span class="character">(Hades)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rachel Adedeji (Persephone); ichelle Andrews</span>
+                        <span class="character">(Worker)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Ride The Cyclone
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type audio">
+            Audio
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Kayna Montecillo</span>
+                        <span class="character">(Ocean)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Josh Butler</span>
+                        <span class="character">(Noel)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Grace Galloway</span>
+                        <span class="character">(Jane Doe)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Robyn Gilbertson</span>
+                        <span class="character">(Constance)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bartek Kraszewski</span>
+                        <span class="character">(Mischa)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jack Maverick</span>
+                        <span class="character">(Ricky)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nathaniel Purnell</span>
+                        <span class="character">(Karnak)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          & Juliet
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                NOV 2019
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                queenofthedead
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                6.62 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Grace Mouat</span>
+                        <span class="character">(u/s Juliet)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Cassidy Janson</span>
+                        <span class="character">(Anne Hathaway)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Oliver Tompsett</span>
+                        <span class="character">(William Shakespeare)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">David Bedella</span>
+                        <span class="character">(Lance)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Melanie La Barrie</span>
+                        <span class="character">(Nurse)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jordan Luke Gage</span>
+                        <span class="character">(Romeo)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tim Mahendran</span>
+                        <span class="character">(Francois)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Arun Blair-Mangat</span>
+                        <span class="character">(May)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jocasta Almgill</span>
+                        <span class="character">(Lady Capulet/Nell)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ivan de Freitas</span>
+                        <span class="character">(Lord Capulet/Sly)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Antoine Murray-Straughan</span>
+                        <span class="character">(Augustine)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kirstie Skivington</span>
+                        <span class="character">(Eleanor/Benvolio)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nathan Lorainey-Dineen</span>
+                        <span class="character">(Gregory)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Alex Tranter</span>
+                        <span class="character">(Henry)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rhian Duncan</span>
+                        <span class="character">(Imogen)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kieran Jae</span>
+                        <span class="character">(Kempe)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Danielle Fiamanya</span>
+                        <span class="character">(Lucy)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          A Gentleman's Guide to Love and Murder
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                Evening - 3/5/14
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                SunsetBlvd79
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                7.83 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Bryce Pinkham</span>
+                        <span class="character">(Monty Navarro)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jefferson Mays</span>
+                        <span class="character">(The D'Ysquith Family)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lisa O'Hare</span>
+                        <span class="character">(Sibella Hallward)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lauren Worsham</span>
+                        <span class="character">(Phoebe D'Ysquith)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jane Carr</span>
+                        <span class="character">(Miss Marietta Shingle)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              A beautiful HD capture of the front runner for Best Musical Tony Award. A hilarious show with an equally hilarious cast. Jefferson Mays is an insanely talented actor! A May be incorrectly listed as 2014-05-14
+(Pretty clear for its resolution. Missing the first half of the first song of Act 2. VOB+smalls files are 6.83 GB and have chapters. There's also a 1 GB MP4 file in the folder.)
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              CAN BE GIFTED
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Alice by Heart
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                MAR 2019
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                StarCuffedJeans
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                6.6 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Molly Gordon</span>
+                        <span class="character">(Alice)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Colton Ryan</span>
+                        <span class="character">(White Rabbit)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Wesley Taylor</span>
+                        <span class="character">(Mad Hatter)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Noah Galvin</span>
+                        <span class="character">(Duchess)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Catherine Ricafort</span>
+                        <span class="character">(Canary)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kim Blanck</span>
+                        <span class="character">(Cheshire Cat)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Grace McLean</span>
+                        <span class="character">(Queen of Hearts)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Heath Saunders</span>
+                        <span class="character">(Caterpillar)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Andrew Kober</span>
+                        <span class="character">(Jabberwocky)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mia DiLena</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Zachary Downer</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Really beautiful shot in an intimate space. Lots of zooms, but a good amount of wider shots too with a very limited (almost nonexistent) amount of heads. The lighting in this theater really liked my camera and I know the show almost “by heart” so I think I followed the action as well as possible. My battery died during the last song, but it starts at the very beginning with only one drop out during dialogue.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Back To The Future (tour ?)
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                10.4 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              <div class="missing">Missing info</div>
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Cabaret (Fifth West End Revival)
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                9.96 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Eddie Redmayne</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor"></span>
+                        <span class="character">(Emily Benjamin)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              YES
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Cabaret (Fifth West End Revival)*
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                9.14 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Reeve Carney</span>
+                        <span class="character">(Emcee)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Eva Noblezada</span>
+                        <span class="character">(Sally Bowled)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              RIPPED
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              NEVER GIFT
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Cats - The Jellicle Ball
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                21 JUN 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Bikinibottomday
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                10.0 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Chasity "Tempress" Moore</span>
+                        <span class="character">(Grizabella)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">André De Shields</span>
+                        <span class="character">(Old Deuteronomy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Junior LaBeija</span>
+                        <span class="character">(Gus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tara Lashan Clinkscales</span>
+                        <span class="character">(u/s Bombalurina)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Dudney Joseph Jr.</span>
+                        <span class="character">(Munkustrap)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sydney James Harcourt</span>
+                        <span class="character">(Rum Tum Tugger)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bebe Nicole Simpson</span>
+                        <span class="character">(Demeter)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Emma Sofia</span>
+                        <span class="character">(Cassandra/Skimbleshanks)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Garnet Williams</span>
+                        <span class="character">(u/s Bustopher Jones)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jonathan Burke</span>
+                        <span class="character">(Mungojerrie)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Dava Huesca</span>
+                        <span class="character">(Rumpleteazer)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Shereen Pimentel</span>
+                        <span class="character">(Jellylorum)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Xavier Reyes</span>
+                        <span class="character">(Jennyanydots)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Robert "Silk" Mason</span>
+                        <span class="character">(Mr. Mistoffelees)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Antwayn Hopper</span>
+                        <span class="character">(Macavity)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Primo</span>
+                        <span class="character">(Tumblebrutus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Teddy Wilson Jr.</span>
+                        <span class="character">(Sillabub)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kendall Grayson Stroud</span>
+                        <span class="character">(Electra)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Baby Byrne</span>
+                        <span class="character">(Victoria)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Shelby Griswold</span>
+                        <span class="character">(u/s Booth/u/s Police Officer/u/s Server)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Frank Viveros</span>
+                        <span class="character">(Booth/Police Officer/Server)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Capital Kaos</span>
+                        <span class="character">(DJ)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Excellent 4K capture of this much-anticipated production. Some action on the balconies or in the audience couldn’t be captured, and because a lot of the staging uses the entire theatre, there are frequent wideshots. Some very minor obstruction in the top right that blocks off a tiny bit of action. Some moments of wandering and unfocusing. Includes curtain call, audio is fed from external source.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              NEVER GIFT
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Chess
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                OCT 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                The Riddle
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                12.4 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Lea Michele</span>
+                        <span class="character">(Florence Vassy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Aaron Tveit</span>
+                        <span class="character">(Freddie Trumper)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nicholas Christopher</span>
+                        <span class="character">(Anatoly Sergievsky)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Hannah Cruz</span>
+                        <span class="character">(Svetlana Sergievsky)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bryce Pinkham</span>
+                        <span class="character">(The Arbiter)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bradley Dean</span>
+                        <span class="character">(Molokov)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sean Allan Krill</span>
+                        <span class="character">(Walter de Courcey)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kyla Bartholomeusz</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Daniel Beeman</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Shavey Brown</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Casey Garvin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Adam Halpin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Aliah James</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sydney Jones</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sean MacLaughlin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sarah Meahl</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ramone Nelson</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Michael Olaribigbe</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Katerina Papacostas</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Aleksandr Ivan Pevec</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Samantha Pollino</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Regine Sophia</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Katie Webber</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Okay 4K capture of this glitzy, modernized interpretation of Romeo and Juliet. Shot over and around one very annoying head, which obstructs the action quite often, and there are moments of blind shooting where the camera focuses on the wrong thing. But when I managed to get closeups, they can be quite nice. Moderate washout in wideshots. Due to the nature of the production taking place in the round, some moments are not captured from the clearest angle. Audio of the intermission music performed by the cast is captured, though video is not. As a general warning, the video contains moments of intense strobing lights: rough timestamps (07:15-09:00), (46:45-47:45), (1:04:45-1:05:30).
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Company
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                MAR 2022
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                StarCuffedJeans
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                6.84 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Katrina Lenk</span>
+                        <span class="character">(Bobbie)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jennifer Simard</span>
+                        <span class="character">(u/s Joanne)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Terence Archie</span>
+                        <span class="character">(Larry)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Matt Doyle</span>
+                        <span class="character">(Jamie)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Etai Benson</span>
+                        <span class="character">(Paul)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kathryn Allison</span>
+                        <span class="character">(u/s Sarah)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Christopher Sieber</span>
+                        <span class="character">(Harry)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rashidra Scott</span>
+                        <span class="character">(Susan)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Greg Hildreth</span>
+                        <span class="character">(Peter)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Britney Coleman</span>
+                        <span class="character">(u/s Jenny)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Christopher Fitzgerald</span>
+                        <span class="character">(David)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Claybourne Elder</span>
+                        <span class="character">(Andy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bobby Conte Thornton</span>
+                        <span class="character">(PJ)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Manu Narayan</span>
+                        <span class="character">(Theo)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Anisha Nagarajan</span>
+                        <span class="character">(New Yorker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jacob Dickey</span>
+                        <span class="character">(New Yorker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Javier Ignacio</span>
+                        <span class="character">(New Yorker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Heath Saunders</span>
+                        <span class="character">(New Yorker)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Excellent HD capture of Jennifer Simard as Joanne! Show stop happened right during the transition to the David and Jenny scene (33:05); the showstop is cut out. Filmed from center mezzanine with mostly no obstructions. Minor washout and wandering throughout. Some minor obstruction on the full bottom that doesn't cover much. No curtain call.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Dracula
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                7 MAR 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Splashzone
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                7.13 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Cynthia Erivo</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              NEVER GIFT
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Evita
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                AndrewLloydWebbersipad
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Rachel Zegler</span>
+                        <span class="character">(Eva Perón)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Diego Andres Rodriguez</span>
+                        <span class="character">(Che)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">James Olivas</span>
+                        <span class="character">(Perón)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Aaron Lee Lambert</span>
+                        <span class="character">(Magaldi)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bella Brown</span>
+                        <span class="character">(Perón's Mistress)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ffion Rosalie Williams</span>
+                        <span class="character">(Child)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Carl Au</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gabriela Benedetti</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kirsty Anne Shaw</span>
+                        <span class="character">(s/w Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Damian Buhagiar</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Regan Bailey Walker</span>
+                        <span class="character">(s/w Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sally Frith</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">DeAngelo Jones</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lucas Koch</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Natasha Leaver</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Michael Lin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Diante Lodge</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Louis Mackrodt</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mireia Mambo</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mia Mullarkey</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Perry O'Dea</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Myla Carmen</span>
+                        <span class="character">(s/w Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Monica Swayne</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jon Tsouras</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Harrison Wilde</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Chess the musical has lyrics by Tim Rice, and is a bit of a rollercoaster that gets staged in various ways with a hardcore fanbase that will argue to the death. Evita does too. my first camera video, not as messy as you'd expect. Enjoy the James fancam in rainbow tour.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Hadestown
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Lasagna
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                10.18 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Dónal Finn</span>
+                        <span class="character">(Orpheus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Grace Hodgett-Young</span>
+                        <span class="character">(Eurydice)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gloria Onitiri</span>
+                        <span class="character">(Persephone)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Zachary James</span>
+                        <span class="character">(Hades)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Melanie La Barrie</span>
+                        <span class="character">(Hermes)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bella Brown</span>
+                        <span class="character">(Fate)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Madeline Charlemagne</span>
+                        <span class="character">(Fate)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Allie Daniel</span>
+                        <span class="character">(Fate)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ryesha Higgs</span>
+                        <span class="character">(s/w Worker)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Solid capture of Donal and Grace’s final performance! Shot around heads. Includes emotional final bows/speeches
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Hadestown
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                2 SEPT 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Bikinibottomday
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                9.58 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Jack Wolfe</span>
+                        <span class="character">(Orpheus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Morgan Dudley</span>
+                        <span class="character">(Eurydice)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rebecca Naomi Jones</span>
+                        <span class="character">(Persephone)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Paulo Szot</span>
+                        <span class="character">(Hades)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kurt Elling</span>
+                        <span class="character">(Hermes)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Shea Renne</span>
+                        <span class="character">(Fate)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jessie Shelton</span>
+                        <span class="character">(Fate)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kay Trinidad</span>
+                        <span class="character">(Fate)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Emily Afton</span>
+                        <span class="character">(Worker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Malcolm Armwood</span>
+                        <span class="character">(Worker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jeffrey Cornelius</span>
+                        <span class="character">(Worker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sydney Parra</span>
+                        <span class="character">(Worker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Alex Puette</span>
+                        <span class="character">(Worker)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              * Excellent 4K capture of Jack, Morgan, Rebecca, Paulo, Kurt, and Jeffrey’s debut! Increased wandering and unfocusing throughout. Includes curtain call and “We Raise Our Cups,” audio fed from external source.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Hercules
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                MTTZ
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                7.3 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Luke Brady</span>
+                        <span class="character">(Hercules)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kimmy Edwards</span>
+                        <span class="character">(s/b Thalia)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Marie Finlayson</span>
+                        <span class="character">(Clio)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Brianna Ogunbawo</span>
+                        <span class="character">(Melpomene)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Malinda Parris</span>
+                        <span class="character">(Calliope)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Robyn Rose-Li</span>
+                        <span class="character">(Terpischore)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rhianne Alleyne</span>
+                        <span class="character">(u/s Meg)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Trevor Dion Nicholas</span>
+                        <span class="character">(Phil)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Stephen Carlile</span>
+                        <span class="character">(Hades)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Craig Gallivan</span>
+                        <span class="character">(Bob)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lee Zarrett</span>
+                        <span class="character">(Charles)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Joel Benjamin</span>
+                        <span class="character">(Zeus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ellie Mitchell</span>
+                        <span class="character">(Hera)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Saffi Needham</span>
+                        <span class="character">(Despina)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lana Antoniou</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sarah Benbelaid</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jack Butcher</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nicole Carlisle</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Cruz-Troy Hunter</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Travis Kerry</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Stefan Lagoulis</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ben Nicholas</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Matt Overfield</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ope Sowande</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jason Leigh Winter</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Into the Woods
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                FEB 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                MTTZ
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                10,26 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Kate Fleetwood</span>
+                        <span class="character">(Witch)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jamie Parker</span>
+                        <span class="character">(Baker)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Katie Brayben</span>
+                        <span class="character">(Baker's Wife)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Chumisa Dornford-May</span>
+                        <span class="character">(Cinderella)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gracie McGonigal</span>
+                        <span class="character">(Little Red Riding Hood)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jo Foster</span>
+                        <span class="character">(Jack)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Taite-Elliot Drew</span>
+                        <span class="character">(s/b Wolf/Cinderella's Prince)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rhys Whitfield</span>
+                        <span class="character">(Rapunzel's Prince)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Michael Gould</span>
+                        <span class="character">(Narrator/Mysterious Man)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Julie Jupp</span>
+                        <span class="character">(Jack's Mother)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jennifer Hepburn</span>
+                        <span class="character">(Cinderella's Stepmother)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gabrielle Lewis-Dodson</span>
+                        <span class="character">(Florinda)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Hana Ichijo</span>
+                        <span class="character">(Lucinda)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Geoffrey Aymer</span>
+                        <span class="character">(Cinderella's Father)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Hughie O'Donnell</span>
+                        <span class="character">(Steward)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bella Brown</span>
+                        <span class="character">(Rapunzel)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Valda Aviks</span>
+                        <span class="character">(Granny/Giant's Voice)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Great capture of this acclaimed revival! Shot in a great mix of wides, mediums, and close-ups. Increased wandering, shaking, and re-adjusting throughout, with some moments of washout and unfocusing. Audio is patched in from an external source; some scraping and rustling might be heard during readjustment periods. Overall a great capture.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Just in Time
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                APR 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                MTTZ
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8.96 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Jonathan Groff</span>
+                        <span class="character">(Bobby Darin)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gracie Lawrence</span>
+                        <span class="character">(Connie Francis)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Erika Henningsen</span>
+                        <span class="character">(Sandra Dee)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Michele Pawk</span>
+                        <span class="character">(Polly Walden)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Emily Bergl</span>
+                        <span class="character">(Nina Cassotto/Mary Douvan/Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Joe Barbara</span>
+                        <span class="character">(Charlie Maffia/Steve Blauner/Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Caesar Samayoa</span>
+                        <span class="character">(Don Kirshner/Giorgio/Angelo/Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lance Roberts</span>
+                        <span class="character">(Murray the K/Ahmet Ertegun/Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Christine Cornish</span>
+                        <span class="character">(Siren/Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Julia Grondin</span>
+                        <span class="character">(Siren/Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Valeria Yamin</span>
+                        <span class="character">(Siren/Others)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Excellent capture of this new musical in early previews! Shot in a great mix of wides, mediums, and close-ups. Some wandering, shaking, and re-adjusting throughout. A couple of brief dropouts. A few moments of brief obstruction in act 2 that don't block any major action. Audio is patched in from an external source. Overall an excellent capture of this Jonathan Groff star vehicle.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Maybe Happy Ending
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                20 NOV 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Bikinibottomday
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                7.82 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Darren Criss</span>
+                        <span class="character">(Oliver)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Helen J. Shen</span>
+                        <span class="character">(Claire)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Dez Duron</span>
+                        <span class="character">(Gil Brentley)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Marcus Choi</span>
+                        <span class="character">(James)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Excellent 4K capture of this show post-opening! Some wandering / readjustment and unfocusing throughout. Includes curtain call and the post-show BC/EFA speech, audio is fed from external source.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Much ado about Nothing
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                FEB 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Jagweed
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8.40 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Tom Hiddleston</span>
+                        <span class="character">(Benedick)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Hayley Atwell</span>
+                        <span class="character">(Beatrice)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mara Huf</span>
+                        <span class="character">(Hero)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">James Phoon</span>
+                        <span class="character">(Claudio)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tim Steed</span>
+                        <span class="character">(Don John)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mason Alexander Park</span>
+                        <span class="character">(Margaret)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mika Onyx Johnson</span>
+                        <span class="character">(Borachio)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Forbes Masson</span>
+                        <span class="character">(Leonato)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gerald Kyd</span>
+                        <span class="character">(Don Pedro)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Phillip Olagoke</span>
+                        <span class="character">(Friar Francis)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Great capture of this acclaimed production. A head does appear in frame on the left hand side throughout the first act. When it appears I ensure it’s brief. Second act occasionally has the top of a head at the bottom of the frame. Neither cause major issues. Recording includes the curtain call and marquee. Filmed in 4K. External audio used.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              NEVER GIFT
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Natasha, Pierre, ...
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                JAN 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Jagweed
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8.98 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Chumisa Dornford-May</span>
+                        <span class="character">(Countess Natasha Rostova)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Declan Bennett</span>
+                        <span class="character">(Pierre Bezukhov)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Maimuna Memon</span>
+                        <span class="character">(Sonya Rostova)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Annette McLaughlin</span>
+                        <span class="character">(Marya Dimitriyevna)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jamie Muscato</span>
+                        <span class="character">(Anatole Kuragin)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Cat Simmons</span>
+                        <span class="character">(Hélène Kuragina Bezukhova)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Daniel Krikler</span>
+                        <span class="character">(Fedya Dolokhov)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Eugene McCoy</span>
+                        <span class="character">(Old Prince Nikolay Bolkonsky/Prince Andrey Bolkonsky)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Chloe Saracco</span>
+                        <span class="character">(Princess Mary Bolkonskaya)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Cedric Neal</span>
+                        <span class="character">(Balaga)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Andrew Berlin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kimberly Blake</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ali Goldsmith</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Chihiro Kawasaki</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nitai Levi</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Annie Majin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              An excellent capture. Some focus issues but nothing major. For about 7 minutes in Act Two there is a tech issue with an AC like sound from a machine. I’ve done my best to minimise the sound as much as I can but it can still be heard. Recording includes the curtain call and a shot of the outside of the theatre.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Oh, Mary
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                OCT 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                3.68 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Cole Escola</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor"></span>
+                        <span class="character">(...)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Operation Mincemeat
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                AUG 2023
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Lasagna
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                7.53 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Holly Sumpton</span>
+                        <span class="character">(s/b Ewen Montagu & Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">David Cumming</span>
+                        <span class="character">(Charles Cholmondeley & Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Zoe Roberts</span>
+                        <span class="character">(Johnny Bevan & Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jak Malone</span>
+                        <span class="character">(Hester Leggatt & Others)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Claire-Marie Hall</span>
+                        <span class="character">(Jean Leslie & Others)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Paddington
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                FEB 2026
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                MTTZ
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                9.53 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Arti Shah</span>
+                        <span class="character">(Paddington On-Stage Performer)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">James Hameed</span>
+                        <span class="character">(Paddington Off-Stage Performer and Remote Puppeteer)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Aimée Fisher</span>
+                        <span class="character">(u/s Mrs. Brown)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Adrian Der Gregorian</span>
+                        <span class="character">(Mr. Brown)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Joseph Bramley</span>
+                        <span class="character">(Jonathan Brown)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Delilah Bennett-Cardy</span>
+                        <span class="character">(Judy Brown)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Victoria Hamilton-Barritt</span>
+                        <span class="character">(Millicent Clyde)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ben Redfern</span>
+                        <span class="character">(u/s Mr. Curry)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bonnie Langford</span>
+                        <span class="character">(Mrs. Bird)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tarinn Callender</span>
+                        <span class="character">(Grant)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Teddy Kempner</span>
+                        <span class="character">(Mr. Gruber)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Amy Booth-Steel</span>
+                        <span class="character">(Lady Sloane/Train Announcer/Mrs. Hachoo)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Brenda Edwards</span>
+                        <span class="character">(Tanya/Voice of Aunt Lucy/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Timi Akinyosade</span>
+                        <span class="character">(Tony)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">David Birch</span>
+                        <span class="character">(s/w Hank the Pigeon/s/w Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tiago Dhondt Bamberger</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jacqueline Hughes</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kellianna Jay</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Natasha Leaver</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sunny Lee</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jáiden Lodge</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Vicki Lee Taylor</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Simon Shorten</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Excellent capture of this immensely hyped musical! Shot in a great mix of wides, mediums, and close-ups. Some increased wandering, shaking, and re-adjusting throughout. Shot over heads that never block significant action. Audio is patched in from an external source; some scraping and rustling might be heard during readjustment periods. Overall an excellent capture of THE BEAR!
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              YES
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              CAN BE GIFTED
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Ragtime
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                EVENING OCT 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                The Riddle
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                12.15 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Joshua Henry</span>
+                        <span class="character">(Coalhouse Walker Jr.)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Caissie Levy</span>
+                        <span class="character">(Mother)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Brandon Uranowitz</span>
+                        <span class="character">(Tateh)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nichelle Lewis</span>
+                        <span class="character">(Sarah)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Colin Donnell</span>
+                        <span class="character">(Father)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ben Levi Ross</span>
+                        <span class="character">(Mother's Younger Brother)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Shaina Taub</span>
+                        <span class="character">(Emma Goldman)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nick Barrington</span>
+                        <span class="character">(The Little Boy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Anna Grace Barlow</span>
+                        <span class="character">(Evelyn Nesbit)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tabitha Lawing</span>
+                        <span class="character">(The Little Girl)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tom Nellis</span>
+                        <span class="character">(Grandfather/Judge/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rodd Cyrus</span>
+                        <span class="character">(Harry Houdini)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jacob Keith Watson</span>
+                        <span class="character">(Willie Conklin/Harry K. Thaw/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">John Clay III</span>
+                        <span class="character">(Booker T. Washington)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kent Overshown</span>
+                        <span class="character">(Reporter/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Billy Cohen</span>
+                        <span class="character">(Stanford White/Charles S. Whitman/Doctor/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">John Rapson</span>
+                        <span class="character">(Admiral Peary/J.P. Morgan)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jason Forbach</span>
+                        <span class="character">(Henry Ford/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Alan Wiggins</span>
+                        <span class="character">(Matthew Henson/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ellie Fishman</span>
+                        <span class="character">(Kathleen/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lauren Blackman</span>
+                        <span class="character">(Welfare Official/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nicholas Barrón</span>
+                        <span class="character">(Baron's Assistant/Trolley Conductor/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kerry Conte</span>
+                        <span class="character">(s/w Brigit/s/w Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kane Emmanuel Miller</span>
+                        <span class="character">(Coalhouse Walker III)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Allison Blackwell</span>
+                        <span class="character">(Sarah's Friend/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Deandre Sevon</span>
+                        <span class="character">(Coalhouse Follower/Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jordan Chin</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rheaume Crenshaw</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ta'Nika Gibson</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">David Jennings</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Marina Kondo</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Morgan Marcell</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kayla Pecchioni</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Great 4k capture of this incredible revival in previews shortly before opening! Fairly severe camera fog within the first 25 minutes, some washout and obstruction from heads in wideshots, but little to no wandering throughout. Due to the nature of the thrust stage and the fact that this video was taken from the side, occasionally actors have their backs turned to the audience and facial expressions are missed. Includes bows.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Rock Me Amadeus
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                28 JUN 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Nachtvogel
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8.44 + 8.32
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Moritz Mausser</span>
+                        <span class="character">(Hans)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Alex Melcher</span>
+                        <span class="character">(Alter Ego)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Andreas Lichtenberger</span>
+                        <span class="character">(Horst)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Katharina Gorgi</span>
+                        <span class="character">(Isabella)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tania Golden</span>
+                        <span class="character">(Maria)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Simon Stockinger</span>
+                        <span class="character">(Billy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Franz Frickel</span>
+                        <span class="character">(Markus)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Martin Enenkel</span>
+                        <span class="character">(Hansi)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Konstantin Simons</span>
+                        <span class="character">(Kleiner Hans)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Matteo Haudek</span>
+                        <span class="character">(Kleiner Billy)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Clemens Otto Bauer</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Anna Carina Buchegger</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Barbara Castka</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Andrea Luca Cotti</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Anneka Dacres</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Klaudia Dodes</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Charles Kreische</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jonathan Metu</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Stefan Mosonyi</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Paula Niederhofer</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Steven Armin Novak</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kevin O'Dwyer</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Maria Pambori</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Stefan Poslovski</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Georg Prohazka</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bettina Schurek</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Benedikt Solle</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Mark van Beelen</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Anna Zagler</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sarah Zippusch</span>
+                        <span class="character">(Ensemble)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Alex's first performance in the final week. Second to last performance of the production overall. With audience that were not much less energetic than the derniere. 1080p HD, steady clear view from the middle with some minor obstruction on the bottom right that doesn't really block anything. With a very shaky curtain call and full audio. Hope you enjoy.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              CAN BE GIFTED
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Romeo + Juliet
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                OCT 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                The Riddle
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                10,62 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Kit Connor</span>
+                        <span class="character">(Romeo)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Rachel Zegler</span>
+                        <span class="character">(Juliet)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Taheen Modak</span>
+                        <span class="character">(Benvolio)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gabby Beans</span>
+                        <span class="character">(Mercutio/Friar Laurence)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Solá Fádìran</span>
+                        <span class="character">(Lord Capulet/Lady Capulet)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tommy Dorfman</span>
+                        <span class="character">(Tybalt/The Nurse)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Gían Pérez</span>
+                        <span class="character">(Paris/Sampson/Peter)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Nihar Duvvuri</span>
+                        <span class="character">(Balthasar)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jasai Chase-Owens</span>
+                        <span class="character">(Gregory)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Daniel Bravo Hernández</span>
+                        <span class="character">(Abraham)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Okay 4K capture of this glitzy, modernized interpretation of Romeo and Juliet. Shot over and around one very annoying head, which obstructs the action quite often, and there are moments of blind shooting where the camera focuses on the wrong thing. But when I managed to get closeups, they can be quite nice. Moderate washout in wideshots. Due to the nature of the production taking place in the round, some moments are not captured from the clearest angle. Audio of the intermission music performed by the cast is captured, though video is not. As a general warning, the video contains moments of intense strobing lights: rough timestamps (07:15-09:00), (46:45-47:45), (1:04:45-1:05:30).
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          Stereophonic
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                JUN 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Bikinibottomday
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                14.1 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Eli Gelb</span>
+                        <span class="character">(Grover)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sarah Pidgeon</span>
+                        <span class="character">(Diana)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tom Pecinka</span>
+                        <span class="character">(Peter)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Juliana Canfield</span>
+                        <span class="character">(Holly)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Will Brill</span>
+                        <span class="character">(Reg)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Chris Stack</span>
+                        <span class="character">(Simon)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Andrew R. Butler</span>
+                        <span class="character">(Charlie)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Excellent 4K capture of this year’s Best Play winner! Minor obstruction is present in the first and second act but is no longer present after intermission. Some moments of wandering and unfocusing, first ten minutes are mostly wideshot. Heads are sometimes cut off if actors stand very far back in the recording booth. One or two short blackouts. The crowd is loud and enthusiastic, which is encouraged, but does mean some moments are difficult to hear. Includes curtain call, audio is fed from external source.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              NEVER GIFT
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          The Mousetrap
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                MAY 2021
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                hitmewithyourbethshot
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                13.7 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Cassidy Janson</span>
+                        <span class="character">(Mollie Ralston)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Danny Mac</span>
+                        <span class="character">(Giles Ralston)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Alexander Wolfe</span>
+                        <span class="character">(Christopher Wren)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Susan Penhaligon</span>
+                        <span class="character">(Mrs Boyle)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Derek Griffiths</span>
+                        <span class="character">(Major Metcalfe)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Lizzie Muncey</span>
+                        <span class="character">(Miss Casewell)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">David Rintoul</span>
+                        <span class="character">(Mr Paravicini)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Paul Hilliar</span>
+                        <span class="character">(Detective Sergeant Trotter)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Shot around heads and safety rails.
+(Has wide shots and closeups, occasional wandering. Clear sound, some crinkles.)
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              CAN BE GIFTED
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          The Outsiders
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                NOV 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                MTTZ
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8,94 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Brody Grant</span>
+                        <span class="character">(Ponyboy Curtis)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Sky Lakota-Lynch</span>
+                        <span class="character">(Johnny Cade)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Joshua Boone</span>
+                        <span class="character">(Dallas Winston)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Brent Comer</span>
+                        <span class="character">(Darrel Curtis)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jason Schmidt</span>
+                        <span class="character">(Sodapop Curtis)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Emma Pittman</span>
+                        <span class="character">(Cherry Valance)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Daryl Tofa</span>
+                        <span class="character">(Two-Bit Mathews)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Kevin William Paul</span>
+                        <span class="character">(Bob Sheldon/Cop)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Dan Berry</span>
+                        <span class="character">(Paul Holden)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">SarahGrace Mariani</span>
+                        <span class="character">(Marcia)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Tilly Evans-Krueger</span>
+                        <span class="character">(Ace)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jordan Chin</span>
+                        <span class="character">(s/w Steve)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">RJ Higton</span>
+                        <span class="character">(Chet)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ryo Kamibayashi</span>
+                        <span class="character">(s/w Trip)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Barton Cowperthwaite</span>
+                        <span class="character">(Brill)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Maggie Kuntz</span>
+                        <span class="character">(s/w Beverly)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Great capture of this excellent show! The first 30-ish minutes have obstruction on the bottom left of the stage and sometimes further center when they lean to the side; some action is missed because of this but it’s worked around as best as possible. The rest is mostly unobstructed. Otherwise shot very well in a great mix of close-ups, mediums, and wide-shots. Some wandering, shaking, and re-adjusting throughout. A couple of brief dropouts. Audio is patched in from an external source; my audio recorder scrapes up against my bag a LOT in this recording and it is often audible. Some grain when the show gets very dark. Overall a great capture.
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          The Portrait of Dorian Gray
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type play">
+            Play
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                MAR 2024
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8.46 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Sarah Snook</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          The Unlikely Pilgrimage of Harold Fry
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                MAY 2025
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Missing info
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                8.41 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              <div class="missing">Missing info</div>
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+    <article class="show-card">
+
+      <header
+        class="show-header"
+        onclick="toggleShow(this)"
+      >
+
+        <h1 class="show-title">
+          The Witches
+        </h1>
+
+        <div class="show-types">
+
+          <span class="show-type musical">
+            Musical
+          </span>
+
+          <span class="document-type video">
+            Video
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="show-content">
+
+        <div class="show-content-inner">
+
+
+          <!-- DATE / SOURCE / FILE -->
+
+          <div class="show-info">
+
+            <div>
+              <div class="info-label">
+                Date
+              </div>
+
+              <div class="info-value">
+                NOV 2023
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                Source
+              </div>
+
+              <div class="info-value">
+                Lasagna
+              </div>
+            </div>
+
+
+            <div>
+              <div class="info-label">
+                File
+              </div>
+
+              <div class="info-value">
+                10.1 Go
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CAST -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Cast
+            </div>
+
+            <div class="cast">
+
+              
+                    <div class="cast-member">
+                        <span class="actor">Sally Ann Triplett</span>
+                        <span class="character">(Gran)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Katherine Kingsley</span>
+                        <span class="character">(Grand High Witch)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Daniel Rigby</span>
+                        <span class="character">(Mr Stringer)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Bertie Caplan</span>
+                        <span class="character">(Luke)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Cian Eagle-Service</span>
+                        <span class="character">(Bruno)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Jersey Blu Georgia</span>
+                        <span class="character">(Helga)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Maggie Service</span>
+                        <span class="character">(Mrs Jenkins/Jan)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Ekow Quartey</span>
+                        <span class="character">(Mr Jenkins)</span>
+                    </div>
+                    
+
+                    <div class="cast-member">
+                        <span class="actor">Chrissie Bhima</span>
+                        <span class="character">(Melanie)</span>
+                    </div>
+                    
+
+            </div>
+
+          </section>
+
+
+          <!-- NOTES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Notes
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+          <!-- SUBTITLES -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Subtitles
+            </div>
+
+            <div class="info-value">
+              NO
+            </div>
+
+          </section>
+
+
+          <!-- STATUS -->
+
+          <section class="show-section">
+
+            <div class="section-title">
+              Gifting Status
+            </div>
+
+            <div class="info-value">
+              Missing info
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </article>
+    
+
+
+  </main>
+
+
+  <script>
+
+    function toggleShow(header) {
+
+      const card = header.closest(".show-card");
+
+      card.classList.toggle("open");
+
+    }
+
+  </script>
 
 </body>
 </html>
