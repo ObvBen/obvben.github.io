@@ -22,8 +22,11 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
       - name: Save previous JSON
-        run: cp shows.json prev_shows.json
+        run: cp shows.json /tmp/prev_shows.json
 
       - name: Update shows
         run: python update_shows.py
@@ -31,7 +34,7 @@ jobs:
       - name: Compare JSON files
         id: compare
         run: |
-          if cmp -s prev_shows.json shows.json; then
+          if cmp -s /tmp/prev_shows.json shows.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No changes detected."
           else
@@ -42,12 +45,9 @@ jobs:
       - name: Commit and push changes
         if: steps.compare.outputs.changed == 'true'
         run: |
-          rm prev_shows.json
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add shows.json
           git commit -m "🤖 Update shows"
           git push
-
