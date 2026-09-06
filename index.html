@@ -358,6 +358,112 @@
 
 
     /* =========================
+       FILTER CARD
+       ========================= */
+
+    .filter-card {
+      width: min(100%, 800px);
+      margin: 0 auto 24px;
+
+      padding: 24px 30px;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      box-shadow:
+        0 12px 40px rgba(90, 30, 50, 0.07);
+
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+
+    .filter-label {
+      margin-right: 4px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+
+    .filter-button {
+      border: none;
+
+      padding: 7px 14px;
+
+      border-radius: 999px;
+
+      background: #f3eff1;
+      color: var(--muted);
+
+      font-family: inherit;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.5px;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+
+    .filter-button:hover {
+      background: #e9e1e4;
+    }
+
+
+    /* Active Musical */
+
+    .filter-button[data-filter="type"][data-value="Musical"].active {
+      background: var(--musical-color);
+      color: white;
+    }
+
+
+    /* Active Play */
+
+    .filter-button[data-filter="type"][data-value="Play"].active {
+      background: var(--play-color);
+      color: white;
+    }
+
+
+    /* Active Video */
+
+    .filter-button[data-filter="nature"][data-value="Video"].active {
+      background: var(--video-color);
+      color: white;
+    }
+
+
+    /* Active Audio */
+
+    .filter-button[data-filter="nature"][data-value="Audio"].active {
+      background: var(--audio-color);
+      color: white;
+    }
+
+
+    /* =========================
        MOBILE
        ========================= */
 
@@ -398,6 +504,21 @@
         padding-right: 22px;
       }
 
+
+      .filter-card {
+        padding: 22px;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 18px;
+      }
+
+
+      .filter-group {
+        flex-wrap: wrap;
+      }
+
     }
 
   </style>
@@ -408,8 +529,79 @@
 
   <main class="shows">
 
+
+    <!-- =========================
+         FILTER
+         ========================= -->
+
+    <article class="filter-card">
+
+      <div class="filter-group">
+
+        <div class="filter-label">
+          Type
+        </div>
+
+
+        <button
+          class="filter-button active"
+          data-filter="type"
+          data-value="Musical"
+        >
+          Musical
+        </button>
+
+
+        <button
+          class="filter-button"
+          data-filter="type"
+          data-value="Play"
+        >
+          Play
+        </button>
+
+      </div>
+
+
+      <div class="filter-group">
+
+        <div class="filter-label">
+          Nature
+        </div>
+
+
+        <button
+          class="filter-button active"
+          data-filter="nature"
+          data-value="Video"
+        >
+          Video
+        </button>
+
+
+        <button
+          class="filter-button"
+          data-filter="nature"
+          data-value="Audio"
+        >
+          Audio
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <!-- =========================
+         SHOWS
+         ========================= -->
+
     
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Audio"
+    >
 
       <header
         class="show-header"
@@ -567,7 +759,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Audio"
+    >
 
       <header
         class="show-header"
@@ -747,7 +943,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Audio"
+    >
 
       <header
         class="show-header"
@@ -915,7 +1115,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Audio"
+    >
 
       <header
         class="show-header"
@@ -1095,7 +1299,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -1335,7 +1543,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -1504,7 +1716,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -1706,7 +1922,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -1845,7 +2065,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -1994,7 +2218,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -2144,7 +2372,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -2414,7 +2646,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -2690,7 +2926,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -2936,7 +3176,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -3079,7 +3323,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -3367,7 +3615,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -3559,7 +3811,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -3775,7 +4031,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -4063,7 +4323,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -4303,7 +4567,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -4507,7 +4775,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -4669,7 +4941,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -4867,7 +5143,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -5101,7 +5381,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -5250,7 +5534,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -5418,7 +5706,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -5694,7 +5986,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -6030,7 +6326,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -6348,7 +6648,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -6546,7 +6850,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -6726,7 +7034,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -6913,7 +7225,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -7147,7 +7463,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Play"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -7290,7 +7610,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -7429,7 +7753,11 @@
     </article>
     
 
-    <article class="show-card">
+    <article
+    class="show-card"
+    data-type="Musical"
+    data-nature="Video"
+    >
 
       <header
         class="show-header"
@@ -7622,10 +7950,15 @@
     
 
 
+
   </main>
 
 
   <script>
+
+    /* =========================
+       SHOW EXPANSION
+       ========================= */
 
     function toggleShow(header) {
 
@@ -7635,7 +7968,104 @@
 
     }
 
+
+    /* =========================
+       FILTERS
+       ========================= */
+
+    let selectedType = "Musical";
+    let selectedNature = "Video";
+
+
+    function applyFilters() {
+
+      const cards = document.querySelectorAll(".show-card");
+
+
+      cards.forEach(card => {
+
+        const type = card.dataset.type;
+        const nature = card.dataset.nature;
+
+
+        const matchesType =
+          type === selectedType;
+
+
+        const matchesNature =
+          nature === selectedNature;
+
+
+        card.style.display =
+          matchesType && matchesNature
+            ? ""
+            : "none";
+
+      });
+
+    }
+
+
+    document
+      .querySelectorAll(".filter-button")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          const filter = button.dataset.filter;
+          const value = button.dataset.value;
+
+
+          if (filter === "type") {
+
+            selectedType = value;
+
+
+            document
+              .querySelectorAll('[data-filter="type"]')
+              .forEach(button => {
+
+                button.classList.remove("active");
+
+              });
+
+          }
+
+
+          if (filter === "nature") {
+
+            selectedNature = value;
+
+
+            document
+              .querySelectorAll('[data-filter="nature"]')
+              .forEach(button => {
+
+                button.classList.remove("active");
+
+              });
+
+          }
+
+
+          button.classList.add("active");
+
+
+          applyFilters();
+
+        });
+
+      });
+
+
+    /* Default filter:
+       Musical + Video
+    */
+
+    applyFilters();
+
   </script>
 
 </body>
 </html>
+
