@@ -9,19 +9,19 @@
     "cast": [
       {
         "actor": "Jamie Muscato",
-        "character": ""
+        "character": "Emcee"
       },
       {
         "actor": "Joy Woods",
-        "character": ""
+        "character": "Sally Bowles"
       },
       {
         "actor": "Baker Mukasa",
-        "character": ""
+        "character": "Cliff Bradshaw"
       },
       {
         "actor": "Ruthie Henshall",
-        "character": ""
+        "character": "Fraulein Schneider"
       }
     ],
     "notes": "Missing info",
@@ -94,7 +94,11 @@
         "character": "Hades"
       },
       {
-        "actor": "Rachel Adedeji (Persephone); ichelle Andrews",
+        "actor": "Rachel Adedeji",
+        "character": "Persephone"
+      },
+      {
+        "actor": "Michelle Andrews",
         "character": "Worker"
       }
     ],
