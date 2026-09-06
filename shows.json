@@ -1098,6 +1098,18 @@
     "status": "Missing info"
   },
   {
+    "show": "Just an empty line",
+    "type": "Musical",
+    "nature": "Video",
+    "date": "Missing info",
+    "source": "Missing info",
+    "file": "Missing info",
+    "cast": [],
+    "notes": "Missing info",
+    "subtitles": "Missing info",
+    "status": "Missing info"
+  },
+  {
     "show": "Just in Time",
     "type": "Musical",
     "nature": "Video",
@@ -2042,18 +2054,6 @@
     ],
     "notes": "Missing info",
     "subtitles": "NO",
-    "status": "Missing info"
-  },
-  {
-    "show": "Just an empty line",
-    "type": "Missing info",
-    "nature": "Missing info",
-    "date": "Missing info",
-    "source": "Missing info",
-    "file": "Missing info",
-    "cast": [],
-    "notes": "Missing info",
-    "subtitles": "Missing info",
     "status": "Missing info"
   }
 ]
