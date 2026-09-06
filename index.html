@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Into the Woods</title>
+
+  <style>
+    :root {
+      --musical-color: #a63d5d;
+      --musical-dark: #7d2945;
+      --musical-light: #f8e9ee;
+
+      --text: #282124;
+      --muted: #766c70;
+      --border: #eadfe3;
+      --background: #f8f5f6;
+      --card: #ffffff;
+      --footer: #fcf9fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+
+      background: var(--background);
+      color: var(--text);
+
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    }
+
+    .show-card {
+      width: min(100%, 620px);
+      margin: 0 auto;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 12px 40px rgba(90, 30, 50, 0.09);
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    .show-header {
+      position: relative;
+
+      padding: 32px 30px 28px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #ffffff 55%,
+          var(--musical-light) 100%
+        );
+
+      border-top: 7px solid var(--musical-color);
+    }
+
+    .show-title {
+      margin: 0 0 12px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 38px;
+      line-height: 1.1;
+      font-weight: 600;
+
+      letter-spacing: -1px;
+
+      color: #261d21;
+    }
+
+    /* =========================
+       SHOW TYPE BADGES
+       ========================= */
+
+    .show-types {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .show-type {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 6px 11px;
+
+      border-radius: 999px;
+
+      background: var(--musical-color);
+      color: white;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.7px;
+    }
+
+    /* =========================
+       MAIN INFORMATION
+       ========================= */
+
+    .show-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 20px;
+
+      padding: 22px 30px;
+
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-label,
+    .section-title {
+      margin-bottom: 7px;
+
+      color: var(--musical-color);
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
+    .show-section {
+      padding: 24px 30px;
+    }
+
+    .show-section + .show-section {
+      padding-top: 0;
+    }
+
+    /* =========================
+       CAST
+       ========================= */
+
+    .cast {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cast-member {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .cast-member .character {
+      color: var(--muted);
+    }
+
+    /* =========================
+       MISSING INFORMATION
+       ========================= */
+
+    .missing {
+      display: inline-block;
+
+      padding: 5px 9px;
+
+      border-radius: 6px;
+
+      background: #f3eff1;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .show-footer {
+      display: flex;
+      justify-content: flex-end;
+
+      padding: 18px 30px;
+
+      background: var(--footer);
+
+      border-top: 1px solid var(--border);
+    }
+
+    .wikipedia-link {
+      color: var(--musical-color);
+
+      text-decoration: none;
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .wikipedia-link:hover {
+      color: var(--musical-dark);
+      text-decoration: underline;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 520px) {
+
+      body {
+        padding: 20px 12px;
+      }
+
+      .show-header,
+      .show-section,
+      .show-info {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .show-title {
+        font-size: 31px;
+      }
+
+      .show-info {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .show-footer {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <article class="show-card">
+
+    <header class="show-header">
+
+      <h1 class="show-title">
+        Into the Woods
+      </h1>
+
+      <div class="show-types">
+        <span class="show-type">MUSICAL</span>
+        <span class="show-type">MUSICAL</span>
+      </div>
+
+    </header>
+
+
+    <div class="show-info">
+
+      <div>
+        <div class="info-label">
+          Date
+        </div>
+
+        <div class="info-value">
+          February 2026
+        </div>
+      </div>
+
+
+      <div>
+        <div class="info-label">
+          Location
+        </div>
+
+        <div class="info-value">
+          Bridge Theatre
+        </div>
+      </div>
+
+    </div>
+
+
+    <section class="show-section">
+
+      <div class="section-title">
+        Cast
+      </div>
+
+      <div class="cast">
+
+        <div class="cast-member">
+          Kate Fleetwood
+          <span class="character">(Witch)</span>
+        </div>
+
+        <div class="cast-member">
+          Jamie Parker
+          <span class="character">(Baker)</span>
+        </div>
+
+        <div class="cast-member">
+          Katie Brayben
+          <span class="character">(Baker's Wife)</span>
+        </div>
+
+        <div class="cast-member">
+          Chumisa Dornford-May
+          <span class="character">(Cinderella)</span>
+        </div>
+
+        <div class="cast-member">
+          Gracie McGonigal
+          <span class="character">(Little Red Riding Hood)</span>
+        </div>
+
+        <div class="cast-member">
+          Jo Foster
+          <span class="character">(Jack)</span>
+        </div>
+
+        <div class="cast-member">
+          Taite-Elliot Drew
+          <span class="character">(s/b Wolf/Cinderella's Prince)</span>
+        </div>
+
+        <div class="cast-member">
+          Rhys Whitfield
+          <span class="character">(Rapunzel's Prince)</span>
+        </div>
+
+        <div class="cast-member">
+          Michael Gould
+          <span class="character">(Narrator/Mysterious Man)</span>
+        </div>
+
+        <div class="cast-member">
+          Julie Jupp
+          <span class="character">(Jack's Mother)</span>
+        </div>
+
+        <div class="cast-member">
+          Jennifer Hepburn
+          <span class="character">(Cinderella's Stepmother)</span>
+        </div>
+
+        <div class="cast-member">
+          Gabrielle Lewis-Dodson
+          <span class="character">(Florinda)</span>
+        </div>
+
+        <div class="cast-member">
+          Hana Ichijo
+          <span class="character">(Lucinda)</span>
+        </div>
+
+        <div class="cast-member">
+          Geoffrey Aymer
+          <span class="character">(Cinderella's Father)</span>
+        </div>
+
+        <div class="cast-member">
+          Hughie O'Donnell
+          <span class="character">(Steward)</span>
+        </div>
+
+        <div class="cast-member">
+          Bella Brown
+          <span class="character">(Rapunzel)</span>
+        </div>
+
+        <div class="cast-member">
+          Valda Aviks
+          <span class="character">(Granny/Giant's Voice)</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="show-section">
+
+      <div class="section-title">
+        Additional Notes
+      </div>
+
+      <div class="missing">
+        Missing info
+      </div>
+
+    </section>
+
+
+    <footer class="show-footer">
+
+      <a
+        class="wikipedia-link"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Wikipedia ↗
+      </a>
+
+    </footer>
+
+  </article>
+
+</body>
+</html>
