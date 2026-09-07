@@ -1942,6 +1942,107 @@
     "status": "NEVER GIFT"
   },
   {
+    "show": "The Great Gatsby",
+    "type": "Musical",
+    "nature": "Video",
+    "date": "2025",
+    "source": "rhythminme",
+    "file": "3.8 Go",
+    "cast": [
+      {
+        "actor": "Jamie Muscato",
+        "character": "Jay Gatsby"
+      },
+      {
+        "actor": "Frances Mayli McCann",
+        "character": "Daisy Buchanan"
+      },
+      {
+        "actor": "Corbin Bleu",
+        "character": "Nick Carraway"
+      },
+      {
+        "actor": "Amber Davies",
+        "character": "Jordan Baker"
+      },
+      {
+        "actor": "Joel Montague",
+        "character": "George Wilson"
+      },
+      {
+        "actor": "John Owen-Jones",
+        "character": "Meyer Wolfsheim"
+      },
+      {
+        "actor": "Jon Robyns",
+        "character": "Tom Buchanan"
+      },
+      {
+        "actor": "Rachel Tucker",
+        "character": "Myrtle Wilson"
+      },
+      {
+        "actor": "George Crawford",
+        "character": ""
+      },
+      {
+        "actor": "Jordan Crouch",
+        "character": ""
+      },
+      {
+        "actor": "Kiara Dario",
+        "character": ""
+      },
+      {
+        "actor": "Frances Dee",
+        "character": ""
+      },
+      {
+        "actor": "Aimée Fisher",
+        "character": ""
+      },
+      {
+        "actor": "Tom Andrew Hargreaves",
+        "character": ""
+      },
+      {
+        "actor": "Alyn Hawke",
+        "character": ""
+      },
+      {
+        "actor": "Ediz Mahmut",
+        "character": ""
+      },
+      {
+        "actor": "Jamel Matthias",
+        "character": ""
+      },
+      {
+        "actor": "Nevé McGuiness-Dyce",
+        "character": ""
+      },
+      {
+        "actor": "Rose Ouellette",
+        "character": ""
+      },
+      {
+        "actor": "Sophie Pourret",
+        "character": ""
+      },
+      {
+        "actor": "William",
+        "character": ""
+      },
+      {
+        "actor": "Lily Wang",
+        "character": ""
+      }
+    ],
+    "notes": "Beautiful capture, occasionally Jamie-focused. Includes audio of bows and playout",
+    "subtitles": "NO",
+    "status": "UNKNOWN"
+  },
+  {
     "show": "The Mousetrap",
     "type": "Play",
     "nature": "Video",
