@@ -664,6 +664,99 @@
     "status": "UNKNOWN"
   },
   {
+    "show": "Company",
+    "type": "Musical",
+    "nature": "Video",
+    "date": "DEC 2021",
+    "source": "StarCuffedJeans",
+    "file": "7.04 Go",
+    "cast": [
+      {
+        "actor": "Katrina Lenk",
+        "character": "Bobbie"
+      },
+      {
+        "actor": "Patti LuPone",
+        "character": "Joanne"
+      },
+      {
+        "actor": "Matt Doyle",
+        "character": "Jamie"
+      },
+      {
+        "actor": "Christopher Fitzgerald",
+        "character": "David"
+      },
+      {
+        "actor": "Christopher Sieber",
+        "character": "Harry"
+      },
+      {
+        "actor": "Jennifer Simard",
+        "character": "Sarah"
+      },
+      {
+        "actor": "Terence Archie",
+        "character": "Larry"
+      },
+      {
+        "actor": "Etai Benson",
+        "character": "Paul"
+      },
+      {
+        "actor": "Nikki Renee Daniels",
+        "character": "Jenny"
+      },
+      {
+        "actor": "Claybourne Elder",
+        "character": "Andy"
+      },
+      {
+        "actor": "Greg Hildreth",
+        "character": "Peter"
+      },
+      {
+        "actor": "Manu Narayan",
+        "character": "Theo"
+      },
+      {
+        "actor": "Rashidra Scott",
+        "character": "Susan"
+      },
+      {
+        "actor": "Bobby Conte Thornton",
+        "character": "Pj"
+      },
+      {
+        "actor": "Kathryn Allison",
+        "character": ""
+      },
+      {
+        "actor": "Britney Coleman",
+        "character": ""
+      },
+      {
+        "actor": "Jacob Dickey",
+        "character": ""
+      },
+      {
+        "actor": "Javier Ignacio",
+        "character": ""
+      },
+      {
+        "actor": "Anisha Nagarajan",
+        "character": ""
+      },
+      {
+        "actor": "Heath Saunders",
+        "character": ""
+      }
+    ],
+    "notes": "Missing info",
+    "subtitles": "NO",
+    "status": "UNKNOWN"
+  },
+  {
     "show": "Dracula",
     "type": "Play",
     "nature": "Video",
