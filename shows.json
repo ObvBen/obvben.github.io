@@ -1252,6 +1252,55 @@
     "status": "UNKNOWN"
   },
   {
+    "show": "Kimberly Akimbo",
+    "type": "Musical",
+    "nature": "Video",
+    "date": "JAN 2025",
+    "source": "MTTZ",
+    "file": "9.04 Go",
+    "cast": [
+      {
+        "actor": "Carolee Carmello",
+        "character": "Kimberly"
+      },
+      {
+        "actor": "Miguel Gil",
+        "character": "Seth"
+      },
+      {
+        "actor": "Laura Woyasz",
+        "character": "Pattie"
+      },
+      {
+        "actor": "Jim Hogan",
+        "character": "Buddy"
+      },
+      {
+        "actor": "Emily Koch",
+        "character": "Debra"
+      },
+      {
+        "actor": "Darron Hayes",
+        "character": "Martin"
+      },
+      {
+        "actor": "Skye Alyssa Friedman",
+        "character": "Teresa"
+      },
+      {
+        "actor": "Grace Capeless",
+        "character": "Delia"
+      },
+      {
+        "actor": "Pierce Wheeler",
+        "character": "Aaron"
+      }
+    ],
+    "notes": "Excellent capture of this ever-wonderful tour with Wicked alum Laura Woyasz joining the cast! Shot in a great mix of wides, mediums, and close-ups. Some wandering, shaking, and re-adjusting throughout. A couple of brief dropouts. Audio is patched in from an external source; some minor scratching and rustling can be heard throughout. Overall an incredible capture of this beautiful show.",
+    "subtitles": "NO",
+    "status": "UNKNOWN"
+  },
+  {
     "show": "Maybe Happy Ending",
     "type": "Musical",
     "nature": "Video",
@@ -2301,6 +2350,18 @@
     "notes": "Missing info",
     "subtitles": "NO",
     "status": "UNKNOWN"
+  },
+  {
+    "show": "The Who's Tommy",
+    "type": "Musical",
+    "nature": "Video",
+    "date": "28 MAY 2024",
+    "source": "Missing info",
+    "file": "Missing info",
+    "cast": [],
+    "notes": "Missing info",
+    "subtitles": "Missing info",
+    "status": "Missing info"
   },
   {
     "show": "The Witches",
