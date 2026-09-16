@@ -1623,12 +1623,37 @@
     "type": "Musical",
     "nature": "Video",
     "date": "4 APR 2025",
-    "source": "Roundabout",
-    "file": "Missing info",
-    "cast": [],
-    "notes": "Missing info",
-    "subtitles": "Missing info",
-    "status": "Missing info"
+    "source": "bikinibottomday",
+    "file": "9.18 Go",
+    "cast": [
+      {
+        "actor": "Ramin Karimloo",
+        "character": "Pirate King"
+      },
+      {
+        "actor": "Jinkx Monsoon",
+        "character": "Ruth"
+      },
+      {
+        "actor": "David Hyde Pierce",
+        "character": "Gilbert/Major-General"
+      },
+      {
+        "actor": "Nicholas Barasch",
+        "character": "Frederic"
+      },
+      {
+        "actor": "Preston Truman Boyd",
+        "character": "Sullivan/Sergeant of Police"
+      },
+      {
+        "actor": "Samantha Williams",
+        "character": "Mabel Stanley"
+      }
+    ],
+    "notes": "Not to be gifted! An amazing capture of not-so-amazing musical adaptation of the Pirates of Penzance comic opera.",
+    "subtitles": "NO",
+    "status": "NEVER GIFT"
   },
   {
     "show": "Ragtime",
